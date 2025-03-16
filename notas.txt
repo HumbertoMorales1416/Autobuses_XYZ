@@ -1,0 +1,8 @@
+16-03-2025
+-- En el main crear un modelo de catalogos para poder tener registro de los catalogos agregados y asi poder generar su permiso general.
+---Datos del modelo
+----Id generico de Django
+----Nombre_Modelo - El nombre de la clase en el modelo
+----Nombre - El nombre del catalogo
+----Descripcion - Funciona principal y notas generales (Como relaciones, especificaciones, validaciones, etc.)
+-- En el archivo de migracion, usar el JSON que esta en el data para poder llenar la tabla nueva de catalogos y la tabla de procesos para asi poder tener una mejor relacion de los procesos.
