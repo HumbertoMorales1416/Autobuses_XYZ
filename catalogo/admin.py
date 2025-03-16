@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Estatus_Unidad, Lineas_Unidades
 
-# Register your models here.
+admin.site.register(Estatus_Unidad)
+admin.site.register(Lineas_Unidades)

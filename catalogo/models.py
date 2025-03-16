@@ -1,9 +1,10 @@
-from django.db import models
-from django.core.exceptions import ValidationError
 import os
 import imghdr
 import datetime
 import unicodedata
+from django.db import models
+from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator
 
 # Sanitizar el nombre del archivo (sin caracteres extraños)
 def sanitize_filename(filename):
@@ -12,7 +13,7 @@ def sanitize_filename(filename):
         if unicodedata.category(c) != 'Mn'
     )
 
-# Renombrar el archivo con formato: nombre_fecha.ext
+# Renombra el archivo con formato: nombre_fecha.ext
 def custom_upload_logo_to(instance, filename):
     sanitized_name = sanitize_filename(instance.nombre.replace(" ", "_"))
     extension = os.path.splitext(filename)[-1].lower()
@@ -30,21 +31,39 @@ def validate_image_mime(file):
 class Estatus_Unidad(models.Model):
   abreviacion = models.CharField(max_length=50, verbose_name="Abreviación")
   nombre = models.CharField(max_length=100, verbose_name="Nombre")
-  color = models.CharField(max_length=20,  verbose_name="Color")
+  color = models.CharField(max_length=7, validators=[RegexValidator(
+          regex=r'^#(?:[0-9a-fA-F]{3}){1,2}$', 
+          message='El color debe estar en formato HEX, por ejemplo: #RRGGBB'
+      )], verbose_name="Color")
 
   def __str__(self):
     return f'{self.abreviacion} - {self.nombre}'
+
+  class Meta:
+    verbose_name_plural = "Estatus de unidades"
+    permissions = [
+            ('can_view_estatus_unidad', 'Estatus de Unidades'),
+            ('can_add_estatus_unidad', 'Agregar'),
+            ('can_edit_estatus_unidad', 'Modificar'),
+            ('can_delete_estatus_unidad', 'Eliminar'),
+        ]
   
 # Clase para poder dar de alta las lineas comerciales de los autobuses
 class Lineas_Unidades(models.Model):
-  nombre = models.CharField(max_length=100, unique=True, verbose_name="Nombre", validators=[
-          lambda value: (value.isalnum() or ' ' in value) or \
-          ValidationError('El nombre solo puede contener letras, números y espacios.')
-        ])
+  nombre = models.CharField(max_length=100, unique=True, verbose_name="Nombre")
   logo = models.ImageField(upload_to=custom_upload_logo_to, validators=[validate_image_mime], null=True, blank=True, verbose_name="Logo")
 
   def __str__(self):
     return self.nombre
+  
+  class Meta:
+    verbose_name_plural = "Lineas"
+    permissions = [
+            ('can_view_lineas_unidad', 'Lineas'),
+            ('can_add_lineas_unidad', 'Agregar'),
+            ('can_edit_lineas_unidad', 'Modificar'),
+            ('can_delete_lineas_unidad', 'Eliminar'),
+        ]
 
 # class Unidad(models.Model):
 #   numero = models.IntegerField(verbose_name="Número Unidad")

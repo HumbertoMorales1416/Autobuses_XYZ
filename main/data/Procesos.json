@@ -1,0 +1,58 @@
+{
+  "procesos": [
+    {
+      "id_proceso": 10000,
+      "nombre_proceso": "can_view_catalogo",
+      "descripcion_proceso": "Catalogos",
+      "tipo_proceso": "catalogo",
+      "contenido": [
+        {
+          "id_proceso": 10100,
+          "nombre_proceso": "can_view_estatus_unidad",
+          "descripcion_proceso": "Estatus de Unidades",
+          "tipo_proceso": "catalogo",
+          "contenido": [
+            {
+              "id_proceso": 10101,
+              "nombre_proceso": "can_add_estatus_unidad",
+              "descripcion_proceso": "Agregar"
+            },
+            {
+              "id_proceso": 10102,
+              "nombre_proceso": "can_edit_estatus_unidad",
+              "descripcion_proceso": "Modificar"
+            },
+            {
+              "id_proceso": 10103,
+              "nombre_proceso": "can_delete_estatus_unidad",
+              "descripcion_proceso": "Eliminar"
+            }
+          ]
+        },
+        {
+          "id_proceso": 10200,
+          "nombre_proceso": "can_view_lineas_unidad",
+          "descripcion_proceso": "Lineas",
+          "tipo_proceso": "catalogo",
+          "contenido": [
+            {
+              "id_proceso": 10201,
+              "nombre_proceso": "can_add_lineas_unidad",
+              "descripcion_proceso": "Agregar"
+            },
+            {
+              "id_proceso": 10202,
+              "nombre_proceso": "can_edit_lineas_unidad",
+              "descripcion_proceso": "Modificar"
+            },
+            {
+              "id_proceso": 10203,
+              "nombre_proceso": "can_delete_lineas_unidad",
+              "descripcion_proceso": "Eliminar"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

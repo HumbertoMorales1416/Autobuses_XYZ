@@ -1,0 +1,91 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css">
+    <link rel="stylesheet" href="{% static "css/base.css" %}" />
+    <title>Autobuses XYZ</title>
+  </head>
+  <body>
+    <div class="menu-btn sidebar-btn" id="sidebar-btn">
+      <i class="fa-solid fa-bars"></i>
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+    <div class="dark-mode-btn" id="dark-mode-btn">
+      <i class="fa-solid fa-moon"></i>
+      <i class="fa-solid fa-sun"></i>
+    </div>
+    <div class="sidebar" id="sidebar">
+      <div class="header">
+        <div class="menu-btn" id="menu-btn">
+          <i class="fa-solid fa-caret-left"></i>
+        </div>
+        <div class="brand">
+          <i class="fa-solid fa-van-shuttle"></i>
+          <span>Autobuses XYZ</span>
+        </div>
+      </div>
+      <div class="menu-container">
+        <div class="search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="search" placeholder="Buscar">
+        </div>
+        <ul class="menu">
+          <li class="menu-item menu-item-static active">
+            <a href="#" class="menu-link">
+              <i class="fa-solid fa-house"></i>
+              <span>Inicio</span>
+            </a>
+          </li>
+          <li class="menu-item menu-item-dropdown">
+            <a href="#" class="menu-link">
+              <i class="fa-solid fa-tag"></i>
+              <span>Venta</span>
+              <i class="fa-solid fa-sort-down"></i>
+            </a>
+            <ul class="sub-menu">
+              <li><a href="#" class="sub-menu-link">Boletos</a></li>
+              <li><a href="#" class="sub-menu-link">Consultar</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="footer">
+        <ul class="menu">
+          <li class="menu-item menu-item-static">
+            <a href="#" class="menu-link">
+              <i class="fa-solid fa-bell"></i>
+              <span>Notificaciones</span>
+            </a>
+          </li>
+          <li class="menu-item menu-item-static">
+            <a href="#" class="menu-link">
+              <i class="fa-solid fa-gear"></i>
+              <span>Configuraciones</span>
+            </a>
+          </li>
+        </ul>
+        <div class="user">
+          <div class="user-img">
+            <img src="{% static "img/default_perfil.png" %}" alt="user">
+          </div>
+          <div class="user-data">
+            <span class="name">Admin</span>
+            <span class="email">admin@correo.com</span>
+          </div>
+          <div class="user-icon">
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% comment %} MAIN {% endcomment %}
+    <main>
+      {% block content %}{% endblock content %}
+    </main>
+    <script src="{% static "js/base.js" %}"></script>
+  </body>
+</html>
