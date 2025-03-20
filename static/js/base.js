@@ -1,70 +1,108 @@
-// DARK MODE
-const darkModeBtn = document.getElementById('dark-mode-btn');
+document.addEventListener('DOMContentLoaded', () => {
+  // Toggles
+  const $toggles = document.querySelectorAll('.js-toggle');
+  $toggles.forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
 
-darkModeBtn.addEventListener('click', () => {
-  document.body.classList.toggle('dark-mode');
-});
+  //Temas
+  const STORAGE_KEY = 'sys-theme';
+  const DEFAULT_THEME = 'light';
 
-// PARA MINIMIZAR EL SIDEBAR
-const sideBar = document.getElementById('sidebar');
-const menuBtn = document.getElementById('menu-btn');
-const sidebarBtn = document.getElementById('sidebar-btn');
+  const state = {
+    chosenTheme: null,
+    appliedTheme: DEFAULT_THEME,
+    OSTheme: null,
+  };
 
-menuBtn.addEventListener('click', () => {
-  sideBar.classList.toggle('minimize');
-});
+  const $theme_Cycle = document.getElementById('js-cycle');
+  const $theme_Switchers = document.querySelectorAll('.js-themes button');
 
-sidebarBtn.addEventListener('click', () => {
-  document.body.classList.toggle('sidebar-hidden');
-});
-
-// MENUS DESPLEGABLES DEL SLIDEBAR
-const menusItemsDropDoqwn = document.querySelectorAll('.menu-item-dropdown');
-const menusItemStatic = document.querySelectorAll('.menu-item-static');
-
-menusItemsDropDoqwn.forEach((menuItem) => {
-  menuItem.addEventListener('click', () => {
-    const subMenu = menuItem.querySelector('.sub-menu');
-    const isActive = menuItem.classList.toggle('sub-menu-toggle');
-    if (subMenu) {
-      if (isActive) {
-        subMenu.style.height = `${subMenu.scrollHeight + 6}px`;
-        subMenu.style.padding = '0.2rem 0';
-      } else {
-        subMenu.style.height = '0';
-        subMenu.style.padding = '0';
-      }
+  const updateThemeUI = () => {
+    if (state.appliedTheme === 'light') {
+      $theme_Cycle.className = 'opt-cycle js-burger is-sun';
+    } else {
+      $theme_Cycle.className = 'opt-cycle js-burger is-moon';
     }
-    menusItemsDropDoqwn.forEach((item) => {
-      if (item !== menuItem) {
-        const otherSubmenu = item.querySelector('.sub-menu');
-        if (otherSubmenu) {
-          item.classList.remove('sub-menu-toggle');
-          otherSubmenu.style.height = '0';
-          otherSubmenu.style.padding = '0';
+
+    $theme_Switchers.forEach((el) => {
+      const swatchTheme = el.dataset.scheme;
+
+      if (state.chosenTheme === swatchTheme) {
+        el.classList.add('is-active');
+      } else {
+        el.classList.remove('is-active');
+      }
+    });
+  };
+
+  const setTheme = (theme, save = true) => {
+    state.chosenTheme = theme;
+    state.appliedTheme = theme;
+    document.documentElement.setAttribute('data-theme', theme);
+    if (save) {
+      window.localStorage.setItem(STORAGE_KEY, theme);
+    }
+
+    updateThemeUI();
+  };
+
+  const localTheme = window.localStorage.getItem(STORAGE_KEY);
+  state.OSTheme = DEFAULT_THEME;
+
+  if (localTheme) {
+    setTheme(localTheme, false);
+  } else {
+    setTheme(DEFAULT_THEME);
+  }
+
+  //Event Listeners
+  $theme_Switchers.forEach((el) => {
+    el.addEventListener('click', () => {
+      const theme = el.dataset.scheme;
+      setTheme(theme);
+    });
+  });
+
+  window
+    .matchMedia('(prefers-color-scheme: dark)')
+    .addEventListener('change', (event) => {
+      const theme = event.matches ? 'dark' : 'light';
+      state.OSTheme = theme;
+      setTheme(theme);
+    });
+
+  // Burgers
+  const $burgers = document.querySelectorAll('.js-burger');
+
+  $burgers.forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetID = el.dataset.target;
+      const $target = document.getElementById(targetID);
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+      e.stopPropagation();
+    });
+  });
+
+  const onClickOutside = (menuSelector) => {
+    document.addEventListener('click', (e) => {
+      const menus = document.querySelectorAll(menuSelector);
+
+      menus.forEach((el) => {
+        if (!el.contains(e.target) && el.classList.contains('is-active')) {
+          el.classList.remove('is-active');
         }
-      }
+      });
     });
-  });
+  };
+
+  onClickOutside('.js-menu');
 });
-
-menusItemStatic.forEach((menuItem) => {
-  menuItem.addEventListener('mouseenter', () => {
-    if (!sideBar.classList.contains('minimize')) return;
-
-    menusItemsDropDoqwn.forEach((item) => {
-      const otherSubmenu = item.querySelector('.sub-menu');
-      if (otherSubmenu) {
-        item.classList.remove('sub-menu-toggle');
-        otherSubmenu.style.height = '0';
-        otherSubmenu.style.padding = '0';
-      }
-    });
-  });
-});
-
-function checkWindowsSize() {
-  sideBar.classList.remove('minimize');
-}
-checkWindowsSize();
-window.addEventListener('resize', checkWindowsSize);

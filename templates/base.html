@@ -3,89 +3,82 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css">
-    <link rel="stylesheet" href="{% static "css/base.css" %}" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Autobuses XYZ</title>
+
+    <link rel="stylesheet" href="{% static "font/fontawesome/css/all.css" %}" />
+    <link rel="stylesheet" href="{% static "css/base.css" %}" />
   </head>
   <body>
-    <div class="menu-btn sidebar-btn" id="sidebar-btn">
-      <i class="fa-solid fa-bars"></i>
-      <i class="fa-solid fa-xmark"></i>
-    </div>
-    <div class="dark-mode-btn" id="dark-mode-btn">
-      <i class="fa-solid fa-moon"></i>
-      <i class="fa-solid fa-sun"></i>
-    </div>
-    <div class="sidebar" id="sidebar">
-      <div class="header">
-        <div class="menu-btn" id="menu-btn">
-          <i class="fa-solid fa-caret-left"></i>
-        </div>
-        <div class="brand">
-          <i class="fa-solid fa-van-shuttle"></i>
-          <span>Autobuses XYZ</span>
+    <! -- HEADER -->
+    <header class="opt-header">
+      <! -- Logo -->
+      <div class="opt-brand">
+        <i class="fa-solid fa-van-shuttle"></i>
+        <span>Autobuses XYZ</span>
+      </div>
+      <! -- Bara de navegacion -->
+      <nav id="js-nav" class="opt-nav">
+        <a href="#" class="opt-nav-item is-active" title="Dasboard">
+          <span class="icon">
+            <i class="fa-solid fa-chart-pie"></i>
+          </span>
+          <span class="opt-nav-item-name">
+            <span class="is-hidden-fullhd">Dash</span>
+            <span class="is-hidden is-block-fullhd">Dashboard</span>
+          </span>
+        </a>
+      </nav>
+      <! -- Selector Tema -->
+      <div class="opt-nav-theme">
+        <button id="js-cycle" class="opt-cycle js-burger" data-target="js-themes">
+          <div class="opt-cycles">
+            <div class="opt-cycle-sun">
+              <span class="icon">
+                <i class="fa-solid fa-sun" aria-hidden="true"></i>
+              </span>
+            </div>
+            <div class="opt-cycle-moon">
+              <span class="icon">
+                <i class="fa-solid fa-moon" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+        </button>
+
+        <div id="js-themes" class="opt-nav-menu is-cycles js-menu js-themes">
+          <button data-scheme="light" class="opt-nav-item is-sun" arial-label="Modo claro">
+            <span class="icon">
+              <i class="fas fa-sun" aria-hidden="true"></i>
+            </span>
+            <span>Claro</span>
+          </button>
+
+          <button data-scheme="dark" class="opt-nav-item is-moon" arial-label="Modo oscuro">
+            <span class="icon">
+              <i class="fas fa-moon" aria-hidden="true"></i>
+            </span>
+            <span>Oscuro</span>
+          </button>
         </div>
       </div>
-      <div class="menu-container">
-        <div class="search">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="search" placeholder="Buscar">
-        </div>
-        <ul class="menu">
-          <li class="menu-item menu-item-static active">
-            <a href="#" class="menu-link">
-              <i class="fa-solid fa-house"></i>
-              <span>Inicio</span>
-            </a>
-          </li>
-          <li class="menu-item menu-item-dropdown">
-            <a href="#" class="menu-link">
-              <i class="fa-solid fa-tag"></i>
-              <span>Venta</span>
-              <i class="fa-solid fa-sort-down"></i>
-            </a>
-            <ul class="sub-menu">
-              <li><a href="#" class="sub-menu-link">Boletos</a></li>
-              <li><a href="#" class="sub-menu-link">Consultar</a></li>
-            </ul>
-          </li>
-        </ul>
+      <! -- Boton Burger -->
+      <div class="navbar-burger opt-nav-burger js-burger" data-target="js-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
-      <div class="footer">
-        <ul class="menu">
-          <li class="menu-item menu-item-static">
-            <a href="#" class="menu-link">
-              <i class="fa-solid fa-bell"></i>
-              <span>Notificaciones</span>
-            </a>
-          </li>
-          <li class="menu-item menu-item-static">
-            <a href="#" class="menu-link">
-              <i class="fa-solid fa-gear"></i>
-              <span>Configuraciones</span>
-            </a>
-          </li>
-        </ul>
-        <div class="user">
-          <div class="user-img">
-            <img src="{% static "img/default_perfil.png" %}" alt="user">
-          </div>
-          <div class="user-data">
-            <span class="name">Admin</span>
-            <span class="email">admin@correo.com</span>
-          </div>
-          <div class="user-icon">
-            <i class="fa-solid fa-right-from-bracket"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    {% comment %} MAIN {% endcomment %}
-    <main>
+    </header>
+
+    <! -- MAIN -->
+    <main id="js-main" class="opt-main">
+      <h1>Content</h1>
       {% block content %}{% endblock content %}
     </main>
+
     <script src="{% static "js/base.js" %}"></script>
   </body>
 </html>
