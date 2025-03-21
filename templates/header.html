@@ -1,0 +1,42 @@
+<header class="opt-header">
+  <div class="opt-brand">
+    <i class="fa-solid fa-van-shuttle"></i>
+    <span>Autobuses XYZ</span>
+  </div>
+
+  {% include 'navbar.html' %}
+
+  <div class="opt-nav-theme">
+    <button id="js-cycle" class="opt-cycle js-burger" data-target="js-themes">
+      <div class="opt-cycles">
+        <div class="opt-cycle-sun">
+          <span class="icon"><i class="fa-solid fa-sun" aria-hidden="true"></i></span>
+        </div>
+        <div class="opt-cycle-moon">
+          <span class="icon"><i class="fa-solid fa-moon" aria-hidden="true"></i></span>
+        </div>
+      </div>
+    </button>
+
+    <div id="js-themes" class="opt-nav-menu is-cycles js-menu js-themes">
+      <button data-scheme="light" class="opt-nav-item is-sun" arial-label="Modo claro">
+        <span class="icon"><i class="fas fa-sun" aria-hidden="true"></i></span>
+        <span>Claro</span>
+      </button>
+
+      <button data-scheme="dark" class="opt-nav-item is-moon" arial-label="Modo oscuro">
+        <span class="icon"><i class="fas fa-moon" aria-hidden="true"></i></span>
+        <span>Oscuro</span>
+      </button>
+    </div>
+  </div>
+
+  <a href="#" class="button is-primary opt-nav-desktop">Login</a>
+
+  <div class="navbar-burger opt-nav-burger js-burger" data-target="js-nav">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</header>
