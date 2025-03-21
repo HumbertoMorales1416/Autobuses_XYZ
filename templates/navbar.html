@@ -14,5 +14,9 @@
     </span>
   </a>
 
-  <a href="#" class="button is-primary opt-nav-mobile">Login</a>
+  {% if user.is_authenticated %}
+    <a href="{% url 'logout' %}" class="button is-primary opt-nav-mobile">Logout</a>
+  {% else %}
+    <a href="{% url 'login' %}" class="button is-primary opt-nav-mobile">Login</a>
+  {% endif %}
 </nav>

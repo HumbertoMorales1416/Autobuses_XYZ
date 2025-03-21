@@ -31,7 +31,11 @@
     </div>
   </div>
 
-  <a href="#" class="button is-primary opt-nav-desktop">Login</a>
+  {% if user.is_authenticated %}
+    <a href="{% url 'logout' %}" class="button is-primary opt-nav-desktop">Logout</a>
+  {% else %}
+    <a href="{% url 'login' %}" class="button is-primary opt-nav-desktop">Login</a>
+  {% endif %}
 
   <div class="navbar-burger opt-nav-burger js-burger" data-target="js-nav">
     <span></span>
